@@ -2,20 +2,24 @@
 
 A simple Django middleware for submitting timings and exceptions to Datadog.
 
+This is a derivative work of conorbranagan's package 
+https://github.com/conorbranagan/django-datadog updated to use the latest python
+datadog API.
+
 ## Installation
 
 Download the code into your project and install it.
 
 ```bash
-git clone git://github.com/conorbranagan/django-datadog.git
-cd django-datadog
+git clone git://github.com/krmboya/dj-datadog.git
+cd dj-datadog
 python setup.py install
 ```
 
-Add `datadog` to your list of installed apps.
+Add `dj-datadog` to your list of installed apps.
 
 ```python
-INSTALLED_APPS += ('datadog')
+INSTALLED_APPS += ('dj-datadog',)
 ```
 
 Add the following configuration to your projects' `settings.py` file:
@@ -31,7 +35,7 @@ The API and app keys can be found at https://app.datadoghq.com/account/settings#
 Add the Datadog request handler to your middleware in `settings.py`.
 
 ```python
-MIDDLEWARE_CLASSES += ('datadog.middleware.DatadogMiddleware')
+MIDDLEWARE_CLASSES += ('dj-datadog.middleware.DatadogMiddleware',)
 ```
 
 ## Usage
@@ -39,7 +43,7 @@ MIDDLEWARE_CLASSES += ('datadog.middleware.DatadogMiddleware')
 Once the middlewhere installed, you'll start receiving events in your Datadog
 stream in the case of an app exception. Here's an example:
 
-![example django exception](https://dl.dropbox.com/u/126553/django-datadog.png)
+![example django exception]()
 
 You will also have new timing metrics available:
 

@@ -9,11 +9,11 @@ if [sys.version_info[0], sys.version_info[1]] < [2, 7]:
     reqs.append("simplejson>=2.0.9")
 
 setup(
-    name = 'django-datadog',
-    version = '0.1.0',
+    name = 'dj-datadog',
+    version = '0.1.1',
     packages = [
-        'datadog',
-        'datadog.middleware'
+        'dj-datadog',
+        'dj-datadog.middleware'
     ],
     include_package_data = True,
     license = 'BSD',
@@ -21,7 +21,9 @@ setup(
     long_description = README,
     author = 'Conor Branagan',
     author_email = 'conor.branagan@gmail.com',
+    maintainer = "Kenny Rachuonyo",
+    maintainer_email = "kenny.rachuonyo@gmail.com",
     install_requires = reqs.extend([
-        'dogapi==1.2.1'
+        'datadog==0.12.0'
     ])
 )
