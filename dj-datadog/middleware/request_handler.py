@@ -9,14 +9,13 @@ except ImportError:
 # django
 from django.conf import settings
 
-# dogapi
-from dogapi import dog_http_api as api
-from dogapi import dog_stats_api
+# datadog
+from datadog import initialize, api
+from datadog import statsd
 
 # init datadog api
-api.api_key = settings.DATADOG_API_KEY
-api.application_key = settings.DATADOG_APP_KEY
-dog_stats_api.start(api_key=settings.DATADOG_API_KEY)
+initialize(api_key=settings.DATADOG_API_KEY, app_key=settings.DATADOG_APP_KEY)
+
 
 class DatadogMiddleware(object):
     DD_TIMING_ATTRIBUTE = '_dd_start_time'
@@ -38,7 +37,9 @@ class DatadogMiddleware(object):
         # Calculate request time and submit to Datadog
         request_time = time.time() - getattr(request, self.DD_TIMING_ATTRIBUTE)
         tags = self._get_metric_tags(request)
-        dog_stats_api.histogram(self.timing_metric, request_time, tags=tags)
+
+        api.Metric.send(metric=self.timing_metric, points=request_time, 
+                        tags=tags)
 
         return response
 
@@ -61,12 +62,13 @@ class DatadogMiddleware(object):
             .format(exc, json.dumps(szble, indent=2))
 
         # Submit the exception to Datadog
-        api.event(title, text, tags=self.event_tags, aggregation_key=request.path,
-            alert_type='error')
+        api.Event.create(title=title, text=text, tags=self.event_tags, 
+                         aggregation_key=request.path,
+                         alert_type='error')
 
         # Increment our errors metric
         tags = self._get_metric_tags(request)
-        dog_stats_api.increment(self.error_metric, tags=tags)
+        statsd.increment(self.error_metric, tags=tags)
 
     def _get_metric_tags(self, request):
         return ['path:{0}'.format(request.path)]
