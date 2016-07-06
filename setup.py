@@ -9,11 +9,11 @@ if [sys.version_info[0], sys.version_info[1]] < [2, 7]:
     reqs.append("simplejson>=2.0.9")
 
 setup(
-    name = 'dj-datadog',
+    name = 'dj_datadog',
     version = '0.1.1',
     packages = [
-        'dj-datadog',
-        'dj-datadog.middleware'
+        'dj_datadog',
+        'dj_datadog.middleware'
     ],
     include_package_data = True,
     license = 'BSD',

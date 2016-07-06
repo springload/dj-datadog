@@ -16,10 +16,10 @@ cd dj-datadog
 python setup.py install
 ```
 
-Add `dj-datadog` to your list of installed apps.
+Add `dj_datadog` to your list of installed apps.
 
 ```python
-INSTALLED_APPS += ('dj-datadog',)
+INSTALLED_APPS += ('dj_datadog',)
 ```
 
 Add the following configuration to your projects' `settings.py` file:
@@ -35,7 +35,7 @@ The API and app keys can be found at https://app.datadoghq.com/account/settings#
 Add the Datadog request handler to your middleware in `settings.py`.
 
 ```python
-MIDDLEWARE_CLASSES += ('dj-datadog.middleware.DatadogMiddleware',)
+MIDDLEWARE_CLASSES += ('dj_datadog.middleware.DatadogMiddleware',)
 ```
 
 ## Usage
