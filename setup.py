@@ -23,7 +23,5 @@ setup(
     author_email = 'conor.branagan@gmail.com',
     maintainer = "Kenny Rachuonyo",
     maintainer_email = "kenny.rachuonyo@gmail.com",
-    install_requires = reqs.extend([
-        'datadog==0.12.0'
-    ])
+    install_requires = reqs + ['datadog==0.12.0']
 )
