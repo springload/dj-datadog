@@ -8,6 +8,7 @@ except ImportError:
 
 # django
 from django.conf import settings
+from django.http import Http404
 
 # datadog
 from datadog import initialize, api
@@ -45,6 +46,10 @@ class DatadogMiddleware(object):
 
     def process_exception(self, request, exception):
         """ Captures Django view exceptions as Datadog events """
+
+        # ignore the Http404 exception
+        if isinstance(exception, Http404):
+            return
 
         # Get a formatted version of the traceback.
         exc = traceback.format_exc()
