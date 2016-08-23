@@ -11,10 +11,7 @@ if [sys.version_info[0], sys.version_info[1]] < [2, 7]:
 setup(
     name = 'dj_datadog',
     version = '0.1.1',
-    packages = [
-        'dj_datadog',
-        'dj_datadog.middleware'
-    ],
+    packages = ['dj_datadog'],
     include_package_data = True,
     license = 'BSD',
     description = ' simple Django middleware for submitting timings and exceptions to Datadog.',
